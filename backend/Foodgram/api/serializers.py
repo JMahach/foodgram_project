@@ -68,8 +68,8 @@ class UserSerializerRead(UserSerializer):
         текущий юзер на запрощеного пользователя.
         """
         request = self.context.get('request')
-        return (request.user.is_authenticated and
-                Subscription.objects.filter(
+        return (request.user.is_authenticated
+                and Subscription.objects.filter(
                     user=request.user,
                     author=obj
                 ).exists())
@@ -309,8 +309,8 @@ class RecipeSerializerRead(serializers.ModelSerializer):
         рецепт в избранное текущего пользователя.
         """
         request = self.context.get('request')
-        return (request.user.is_authenticated and
-                obj.favorites.filter(user=request.user.id).exists())
+        return (request.user.is_authenticated
+                and obj.favorites.filter(user=request.user.id).exists())
 
     def get_is_in_shopping_cart(self, obj):
         """
@@ -318,8 +318,8 @@ class RecipeSerializerRead(serializers.ModelSerializer):
         рецепт в список покпок текущего пользователя.
         """
         request = self.context.get('request')
-        return (request.user.is_authenticated and
-                obj.shopping_list.filter(user=request.user.id).exists())
+        return (request.user.is_authenticated
+                and obj.shopping_list.filter(user=request.user.id).exists())
 
 
 class RecipeSerializerBrief(serializers.ModelSerializer):

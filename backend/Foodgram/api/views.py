@@ -160,7 +160,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=False,
-        methods=['get',],
+        methods=['get', ],
         permission_classes=(IsAuthenticated, )
     )
     def download_shopping_cart(self, request):
@@ -170,8 +170,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             for amount in shopping_list.recipe.amounts.all():
                 result[amount.ingredient.name] = [
                     result.get(amount.ingredient.name, [0, 0])[0]
-                    +
-                    amount.amount,
+                    + amount.amount,
                     amount.ingredient.measurement_unit
                 ]
 
