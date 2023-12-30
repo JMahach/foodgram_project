@@ -249,7 +249,7 @@ class RecipeSerializerWrite(serializers.ModelSerializer):
         instance.author = instance.author
         instance.name = validated_data.get('name', instance.name)
         instance.text = validated_data.get('text', instance.text)
-        instance.image = validated_data.get('image', instance.text)
+        instance.image = validated_data.get('image', instance.image)
         instance.cooking_time = validated_data.get('cooking_time',
                                                    instance.cooking_time)
 
