@@ -162,7 +162,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
         methods=['get',],
         permission_classes=(IsAuthenticated, )
     )
-    def download_shopping_cart(self, request, pk):
+    def download_shopping_cart(self, request):
+        user = self.request.user
         # ingredients = Amount.objects.filter(
         #     recipe__carts__user=request.user
         # ).values(
@@ -178,4 +179,4 @@ class RecipeViewSet(viewsets.ModelViewSet):
         # response['Content-Disposition'] = \
         #     'attachment; filename="shopping_cart.txt"'
         # return response
-        pass
+        # pass

@@ -128,5 +128,5 @@ AUTH_USER_MODEL = 'users.User'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'collected_static'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://mahajoty.ru/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
