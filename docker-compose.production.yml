@@ -1,0 +1,35 @@
+version: '3.3'
+
+volumes:
+  pg_data:
+  static:
+  media:
+
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    image: jmahach/foodgram_backend
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - static:/backend_static
+      - media:/app/media
+
+  frontend:
+    image: jmahach/foodgram_frontend
+    volumes:
+      - static:/static
+
+  nginx:
+    image: jmahach/foodgram_gateway
+    ports:
+      - "9000:80"
+    volumes:
+      - static:/static
+      - media:/media

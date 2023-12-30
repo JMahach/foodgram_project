@@ -1,0 +1,135 @@
+### USERS
+GET http://localhost/api/users/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+POST http://localhost/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+  "email": "vpupkin@yandex.ru",
+  "username": "dfkgssbdsfg",
+  "first_name": "Вася",
+  "last_name": "Пупкин",
+  "password": "13124aj124fgb;adjfbgadf22"
+}
+###
+POST http://localhost/api/auth/token/login/ HTTP/1.1
+content-type: application/json
+
+{
+  "email": "vpupkin@yandex.ru",
+  "password": "13124aj124fgb;adjfbgadf22"
+}
+###
+POST http://localhost/api/auth/token/logout/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+POST http://localhost/api/users/set_password/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+
+{
+  "new_password": "13124aj124fgb;adjfbgadf",
+  "current_password": "13124aj124fgb;adjfbgadf2"
+}
+###
+### SUBSCRIPES
+GET http://localhost/api/users/subscriptions/?recipes_limit=1, HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+POST http://localhost/api/users/2/subscribe/?recipes_limit=1 HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+DELETE http://localhost/api/users/1/subscribe/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+# 
+# Authorization: Token 
+# 
+# 
+### TAGS
+GET http://localhost/api/tags/ HTTP/1.1
+###
+#
+# ?page=1&limit=999&is_in_shopping_cart=1
+#
+#
+### RECIPES
+GET http://localhost/api/recipes/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+DELETE http://localhost/api/recipes/4/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+PATCH http://localhost/api/recipes/2/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+
+{
+    "name": "Макароны по-флотски",
+    "text": "в",
+    "cooking_time": 5,
+    "ingredients": [
+        {
+            "id": 2,
+            "amount": 12
+        },
+        {
+            "id": 1,
+            "amount": 12
+        }
+    ],
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+    "tags": [
+        2
+    ]
+}
+###
+POST http://localhost/api/recipes/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+
+{
+    "ingredients": [
+        {
+            "id": 1,
+            "amount": 1 
+        },
+        {
+            "id": 2,
+            "amount": 13
+        }
+    ],
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAgMAAABieywaAAAACVBMVEUAAAD///9fX1/S0ecCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNoAAAAggCByxOyYQAAAABJRU5ErkJggg==",
+    "tags": [
+        1
+    ],
+    "name": "Рыба в соусе",
+    "text": "в2",
+    "cooking_time": 1
+}
+###
+### FAVORITE
+POST http://localhost/api/recipes/3/favorite/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+DELETE  http://localhost/api/recipes/3/favorite/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+### SHOPPING_CART
+POST http://localhost/api/recipes/3/shopping_cart/ HTTP/1.1
+content-type: application/json
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+DELETE http://localhost/api/recipes/3/shopping_cart/ HTTP/1.1
+Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+###
+#
+# 
+#
+#
+### INGRIDIENTS
+GET http://localhost/api/ingredients/ HTTP/1.1
