@@ -220,13 +220,6 @@ class RecipeSerializerWrite(serializers.ModelSerializer):
         if not data.get('ingredients'):
             errors['ingredients'] = 'Необходимо указать хотябы 1 ингридиент.'
 
-        expected_fields = set(self.fields.keys())
-        provided_fields = set(data.keys())
-        missing_fields = expected_fields - provided_fields
-        if missing_fields:
-            for field in missing_fields:
-                errors[field] = 'Обязательное поле.'
-
         if errors:
             raise serializers.ValidationError(errors)
 
