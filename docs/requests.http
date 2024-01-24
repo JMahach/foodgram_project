@@ -1,19 +1,19 @@
 ### USERS
-GET http://localhost/api/users/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+GET http://127.0.0.1:8000/api/users/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-POST http://localhost/api/users/ HTTP/1.1
+POST http://127.0.0.1:8000/api/users/ HTTP/1.1
 content-type: application/json
 
 {
   "email": "vpupkin@yandex.ru",
-  "username": "dfkgssbdsfg",
+  "username": "mee",
   "first_name": "Вася",
   "last_name": "Пупкин",
   "password": "13124aj124fgb;adjfbgadf22"
 }
 ###
-POST http://localhost/api/auth/token/login/ HTTP/1.1
+POST http://127.0.0.1:8000/api/auth/token/login/ HTTP/1.1
 content-type: application/json
 
 {
@@ -21,13 +21,13 @@ content-type: application/json
   "password": "13124aj124fgb;adjfbgadf22"
 }
 ###
-POST http://localhost/api/auth/token/logout/ HTTP/1.1
+POST http://127.0.0.1:8000/api/auth/token/logout/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-POST http://localhost/api/users/set_password/ HTTP/1.1
+POST http://127.0.0.1:8000/api/users/set_password/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 
 {
   "new_password": "13124aj124fgb;adjfbgadf",
@@ -35,37 +35,37 @@ Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
 }
 ###
 ### SUBSCRIPES
-GET http://localhost/api/users/subscriptions/?recipes_limit=1, HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+GET http://127.0.0.1:8000/api/users/subscriptions/?recipes_limit=1, HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-POST http://localhost/api/users/2/subscribe/?recipes_limit=1 HTTP/1.1
+POST http://127.0.0.1:8000/api/users/2/subscribe/?recipes_limit=1 HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-DELETE http://localhost/api/users/1/subscribe/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+DELETE http://127.0.0.1:8000/api/users/1/subscribe/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
 # 
-# Authorization: Token 
+# Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 # 
 # 
 ### TAGS
-GET http://localhost/api/tags/ HTTP/1.1
+GET http://127.0.0.1:8000/api/tags/ HTTP/1.1
 ###
 #
 # ?page=1&limit=999&is_in_shopping_cart=1
 #
 #
 ### RECIPES
-GET http://localhost/api/recipes/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+GET http://127.0.0.1:8000/api/recipes/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-DELETE http://localhost/api/recipes/4/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+DELETE http://127.0.0.1:8000/api/recipes/4/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-PATCH http://localhost/api/recipes/2/ HTTP/1.1
+PATCH http://127.0.0.1:8000/api/recipes/2/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 
 {
     "name": "Макароны по-флотски",
@@ -87,9 +87,9 @@ Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
     ]
 }
 ###
-POST http://localhost/api/recipes/ HTTP/1.1
+POST http://127.0.0.1:8000/api/recipes/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 
 {
     "ingredients": [
@@ -112,24 +112,24 @@ Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
 }
 ###
 ### FAVORITE
-POST http://localhost/api/recipes/3/favorite/ HTTP/1.1
+POST http://127.0.0.1:8000/api/recipes/3/favorite/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-DELETE  http://localhost/api/recipes/3/favorite/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+DELETE  http://127.0.0.1:8000/api/recipes/3/favorite/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
 ### SHOPPING_CART
-POST http://localhost/api/recipes/3/shopping_cart/ HTTP/1.1
+POST http://127.0.0.1:8000/api/recipes/3/shopping_cart/ HTTP/1.1
 content-type: application/json
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
-DELETE http://localhost/api/recipes/3/shopping_cart/ HTTP/1.1
-Authorization: Token 35b85e9aa401da9832e09083778d5372ffe14e39
+DELETE http://127.0.0.1:8000/api/recipes/3/shopping_cart/ HTTP/1.1
+Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 ###
 #
 # 
 #
 #
 ### INGRIDIENTS
-GET http://localhost/api/ingredients/ HTTP/1.1
+GET http://127.0.0.1:8000/api/ingredients/ HTTP/1.1
