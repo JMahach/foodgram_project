@@ -1,12 +1,11 @@
 from django.db import transaction
-from djoser.serializers import UserSerializer, UserCreateSerializer
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
-
 from api.utils import Base64ImageField
-from recipes.models import (Amount, Favorite, Ingredient,
-                            Recipe, ShoppingList, Tag)
+from recipes.models import (Amount, Favorite, Ingredient, Recipe, ShoppingList,
+                            Tag)
 from users.models import Subscription, User
 
 
@@ -218,7 +217,7 @@ class RecipeSerializerWrite(serializers.ModelSerializer):
         if not data.get('tags'):
             errors['tags'] = 'Необходимо указать хотябы 1 тег.'
         if not data.get('ingredients'):
-            errors['ingredients'] = 'Необходимо указать хотябы 1 ингридиент.'
+            errors['ingredients'] = 'Необходимо указать хотябы 1 ингредиент.'
 
         if errors:
             raise serializers.ValidationError(errors)

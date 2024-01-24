@@ -1,18 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, status, views, viewsets, generics
+from rest_framework import generics, mixins, status, views, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from api.permissions import IsAdminOrAuthorOrReadOnly
-from api.serializers import (IngredientSerializer, FavoriteSerializer,
+from api.serializers import (FavoriteSerializer, IngredientSerializer,
                              RecipeSerializerRead, RecipeSerializerWrite,
                              ShoppingListSerializer, SubscripeSerializer,
                              TagSerializer, UserSerializerSubscripe)
-from api.utils import IngredientFilter, RecipeFilter
-from recipes.models import Ingredient, Favorite, Recipe, ShoppingList, Tag
+from api.utils import IngredientFilter, RecipeFilter, model_add_delete
+from recipes.models import Favorite, Ingredient, Recipe, ShoppingList, Tag
 from users.models import Subscription, User
 
 
@@ -111,25 +111,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def favorite(self, request, pk):
         """Работа с избранными рецептами. Добавление и удаление."""
-        recipe = self.get_object()
-        if request.method == 'POST':
-            serializer = FavoriteSerializer(
-                data={
-                    'user': request.user.pk,
-                    'recipe': recipe.pk
-                },
-                context={'request': request}
-            )
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        if request.method == 'DELETE':
-            get_object_or_404(
-                Favorite,
-                user=request.user,
-                recipe=recipe).delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        return model_add_delete(self, request, FavoriteSerializer, Favorite)
 
     @action(
         detail=True,
@@ -138,25 +120,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def shopping_cart(self, request, pk):
         """Работа с списком покупок рецептами. Добавление и удаление."""
-        recipe = self.get_object()
-        if request.method == 'POST':
-            serializer = ShoppingListSerializer(
-                data={
-                    'user': request.user.pk,
-                    'recipe': recipe.pk
-                },
-                context={'request': request}
-            )
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        if request.method == 'DELETE':
-            get_object_or_404(
-                ShoppingList,
-                user=request.user,
-                recipe=recipe).delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        return model_add_delete(
+            self,
+            request,
+            ShoppingListSerializer,
+            ShoppingList
+        )
 
     @action(
         detail=False,

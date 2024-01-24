@@ -1,11 +1,16 @@
 # flake8: noqa
 import os
-
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# SECRET_KEY = 'django-insecure-a08x9)b%f^9g*367^$(^b&c&)1-wgxkhszd_92a2p3u@mbdu$@'
+# DEBUG = True
+# ALLOWED_HOSTS = [
+#     'localhost',
+#     '127.0.0.1',
+# ]
 SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
@@ -136,4 +141,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'collected_static'
 
 MEDIA_URL = 'https://mahajoty.ru/media/'
+# MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

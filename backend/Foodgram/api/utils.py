@@ -1,8 +1,10 @@
 import base64
 
 from django.core.files.base import ContentFile
-from django_filters.rest_framework import filters, FilterSet
-from rest_framework import serializers
+from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import FilterSet, filters
+from rest_framework import serializers, status
+from rest_framework.response import Response
 
 from recipes.models import Ingredient, Recipe, Tag
 
@@ -62,3 +64,28 @@ class RecipeFilter(FilterSet):
         if value and user.is_authenticated:
             return queryset.filter(shopping_list__user=user)
         return queryset
+
+
+def model_add_delete(self, request, Serializer, Model):
+    """
+    Вспомогательная функция для добавления и удаления рецепта
+    в избранное или список покупок.
+    """
+
+    recipe = self.get_object()
+    if request.method == 'POST':
+        serializer = Serializer(
+            data={
+                'user': request.user.pk,
+                'recipe': recipe.pk
+            },
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    get_object_or_404(
+        Model,
+        user=request.user,
+        recipe=recipe).delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)

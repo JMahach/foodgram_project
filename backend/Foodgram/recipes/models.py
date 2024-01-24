@@ -25,23 +25,23 @@ class Tag(models.Model):
         max_length=200,
     )
 
-    def __str__(self):
-        return self.name[:LETTER_LIMIT]
-
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
+    def __str__(self):
+        return self.name[:LETTER_LIMIT]
+
 
 class Ingredient(models.Model):
-    """Модель Ингридиента."""
+    """Модель Ингредиента."""
 
     name = models.CharField('Название', max_length=200)
     measurement_unit = models.CharField('Eдиница измерения', max_length=10)
 
     class Meta:
-        verbose_name = 'Ингридиент'
-        verbose_name_plural = 'Ингридиенты'
+        verbose_name = 'Ингредиент'
+        verbose_name_plural = 'Ингредиенты'
 
     def __str__(self):
         return self.name[:LETTER_LIMIT]
@@ -66,7 +66,7 @@ class Recipe(models.Model):
     )
     ingredients = models.ManyToManyField(
         Ingredient,
-        verbose_name='Ингридиент',
+        verbose_name='Ингредиент',
         through='Amount',
         through_fields=('recipe', 'ingredient')
     )
@@ -93,13 +93,13 @@ class Recipe(models.Model):
 
 class Amount(models.Model):
     """
-    Модель колличества Ингридиента.
+    Модель колличества Ингредиента.
     Cвязующщая таблица многие-ко-мнгоим для моделей Рецепта и Ингридиета.
     """
 
     ingredient = models.ForeignKey(
         Ingredient,
-        verbose_name='Ингридиент',
+        verbose_name='Ингредиент',
         related_name='amounts',
         on_delete=models.CASCADE,
     )
@@ -115,8 +115,8 @@ class Amount(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Колличество Ингридиента'
-        verbose_name_plural = 'Колличества Ингридиентов'
+        verbose_name = 'Колличество Ингредиента'
+        verbose_name_plural = 'Колличества Ингредиентов'
 
     def __str__(self):
         return (f'{self.ingredient.name} '
