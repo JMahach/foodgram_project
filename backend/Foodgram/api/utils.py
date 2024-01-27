@@ -6,7 +6,7 @@ from django_filters.rest_framework import FilterSet, filters
 from rest_framework import serializers, status
 from rest_framework.response import Response
 
-from recipes.models import Ingredient, Recipe, Tag
+from recipes.models import Amount, Ingredient, Recipe, Tag
 
 
 class Base64ImageField(serializers.ImageField):
@@ -66,10 +66,10 @@ class RecipeFilter(FilterSet):
         return queryset
 
 
-def model_add_delete(self, request, Serializer, Model):
+def recipe_add_or_del(self, request, Serializer, Model):
     """
-    Вспомогательная функция для добавления и удаления рецепта
-    в избранное или список покупок.
+    Вспомогательная функция для управления рецептами:
+    добавление в избранное и список покупок или их удаление
     """
 
     recipe = self.get_object()
@@ -89,3 +89,22 @@ def model_add_delete(self, request, Serializer, Model):
         user=request.user,
         recipe=recipe).delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def add_ingredients(ingredients_data, recipe):
+    """
+    Вспомогательная функция для добавления ингридиентов к рецепту
+    при создании или редактировании рецепта.
+    """
+
+    ingredients = []
+    for ingredient_data in ingredients_data:
+        ingredients.append(
+            Amount(
+                recipe=recipe,
+                ingredient=get_object_or_404(Ingredient,
+                                             id=ingredient_data['id']),
+                amount=ingredient_data['amount']
+            )
+        )
+    Amount.objects.bulk_create(ingredients)

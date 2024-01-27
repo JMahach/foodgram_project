@@ -11,7 +11,7 @@ from api.serializers import (FavoriteSerializer, IngredientSerializer,
                              RecipeSerializerRead, RecipeSerializerWrite,
                              ShoppingListSerializer, SubscripeSerializer,
                              TagSerializer, UserSerializerSubscripe)
-from api.utils import IngredientFilter, RecipeFilter, model_add_delete
+from api.utils import IngredientFilter, RecipeFilter, recipe_add_or_del
 from recipes.models import Favorite, Ingredient, Recipe, ShoppingList, Tag
 from users.models import Subscription, User
 
@@ -111,7 +111,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def favorite(self, request, pk):
         """Работа с избранными рецептами. Добавление и удаление."""
-        return model_add_delete(self, request, FavoriteSerializer, Favorite)
+        return recipe_add_or_del(self, request, FavoriteSerializer, Favorite)
 
     @action(
         detail=True,
@@ -120,7 +120,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def shopping_cart(self, request, pk):
         """Работа с списком покупок рецептами. Добавление и удаление."""
-        return model_add_delete(
+        return recipe_add_or_del(
             self,
             request,
             ShoppingListSerializer,

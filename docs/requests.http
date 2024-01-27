@@ -1,19 +1,19 @@
 ### USERS
-GET http://127.0.0.1:8000/api/users/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+GET http://127.0.0.1/api/users/1/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-POST http://127.0.0.1:8000/api/users/ HTTP/1.1
+POST http://127.0.0.1/api/users/ HTTP/1.1   
 content-type: application/json
 
 {
-  "email": "vpupkin@yandex.ru",
-  "username": "mee",
+  "email": "vpupkifn@yandex.ru",
+  "username": "mfee",
   "first_name": "Вася",
   "last_name": "Пупкин",
   "password": "13124aj124fgb;adjfbgadf22"
 }
 ###
-POST http://127.0.0.1:8000/api/auth/token/login/ HTTP/1.1
+POST http://127.0.0.1/api/auth/token/login/ HTTP/1.1
 content-type: application/json
 
 {
@@ -21,13 +21,13 @@ content-type: application/json
   "password": "13124aj124fgb;adjfbgadf22"
 }
 ###
-POST http://127.0.0.1:8000/api/auth/token/logout/ HTTP/1.1
+POST http://127.0.0.1/api/auth/token/logout/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-POST http://127.0.0.1:8000/api/users/set_password/ HTTP/1.1
+POST http://127.0.0.1/api/users/set_password/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 
 {
   "new_password": "13124aj124fgb;adjfbgadf",
@@ -35,37 +35,37 @@ Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 }
 ###
 ### SUBSCRIPES
-GET http://127.0.0.1:8000/api/users/subscriptions/?recipes_limit=1, HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+GET http://127.0.0.1/api/users/subscriptions/?recipes_limit=2 HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-POST http://127.0.0.1:8000/api/users/2/subscribe/?recipes_limit=1 HTTP/1.1
+POST http://127.0.0.1/api/users/1/subscribe/?recipes_limit=2 HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-DELETE http://127.0.0.1:8000/api/users/1/subscribe/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+DELETE http://127.0.0.1/api/users/1/subscribe/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
 # 
-# Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+# Authorization: Token b5be6520de6677bbc969587649855211306a447c
 # 
 # 
 ### TAGS
-GET http://127.0.0.1:8000/api/tags/ HTTP/1.1
+GET http://127.0.0.1/api/tags/ HTTP/1.1
 ###
 #
 # ?page=1&limit=999&is_in_shopping_cart=1
 #
 #
 ### RECIPES
-GET http://127.0.0.1:8000/api/recipes/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+GET http://127.0.0.1/api/recipes/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-DELETE http://127.0.0.1:8000/api/recipes/4/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+DELETE http://127.0.0.1/api/recipes/4/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-PATCH http://127.0.0.1:8000/api/recipes/2/ HTTP/1.1
+PATCH http://127.0.0.1/api/recipes/11/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 
 {
     "name": "Макароны по-флотски",
@@ -87,18 +87,18 @@ Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
     ]
 }
 ###
-POST http://127.0.0.1:8000/api/recipes/ HTTP/1.1
+POST http://127.0.0.1/api/recipes/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 
 {
     "ingredients": [
         {
-            "id": 1,
-            "amount": 1 
+            "id": 2,
+            "amount": 1
         },
         {
-            "id": 2,
+            "id": 1,
             "amount": 13
         }
     ],
@@ -112,24 +112,24 @@ Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
 }
 ###
 ### FAVORITE
-POST http://127.0.0.1:8000/api/recipes/3/favorite/ HTTP/1.1
+POST http://127.0.0.1/api/recipes/3/favorite/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-DELETE  http://127.0.0.1:8000/api/recipes/3/favorite/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+DELETE  http://127.0.0.1/api/recipes/3/favorite/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
 ### SHOPPING_CART
-POST http://127.0.0.1:8000/api/recipes/3/shopping_cart/ HTTP/1.1
+POST http://127.0.0.1/api/recipes/3/shopping_cart/ HTTP/1.1
 content-type: application/json
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
-DELETE http://127.0.0.1:8000/api/recipes/3/shopping_cart/ HTTP/1.1
-Authorization: Token bb0b974468816c1d862c10e8ccbe49d2659db140
+DELETE http://127.0.0.1/api/recipes/3/shopping_cart/ HTTP/1.1
+Authorization: Token b5be6520de6677bbc969587649855211306a447c
 ###
 #
 # 
 #
 #
 ### INGRIDIENTS
-GET http://127.0.0.1:8000/api/ingredients/ HTTP/1.1
+GET http://127.0.0.1/api/ingredients/ HTTP/1.1
