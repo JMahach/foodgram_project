@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
@@ -12,7 +13,8 @@ from api.serializers import (FavoriteSerializer, IngredientSerializer,
                              ShoppingListSerializer, SubscripeSerializer,
                              TagSerializer, UserSerializerSubscripe)
 from api.utils import IngredientFilter, RecipeFilter, recipe_add_or_del
-from recipes.models import Favorite, Ingredient, Recipe, ShoppingList, Tag
+from recipes.models import (Amount, Favorite, Ingredient, Recipe, ShoppingList,
+                            Tag)
 from users.models import Subscription, User
 
 
@@ -119,7 +121,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         permission_classes=(IsAuthenticated, )
     )
     def shopping_cart(self, request, pk):
-        """Работа с списком покупок рецептами. Добавление и удаление."""
+        """Работа с списком покупок. Добавление и удаление."""
         return recipe_add_or_del(
             self,
             request,
@@ -133,20 +135,23 @@ class RecipeViewSet(viewsets.ModelViewSet):
         permission_classes=(IsAuthenticated, )
     )
     def download_shopping_cart(self, request):
-        user = self.request.user
-        result = dict()
-        for shopping_list in ShoppingList.objects.filter(user=user):
-            for amount in shopping_list.recipe.amounts.all():
-                result[amount.ingredient.name] = [
-                    result.get(amount.ingredient.name, [0, 0])[0]
-                    + amount.amount,
-                    amount.ingredient.measurement_unit
-                ]
+        """Работа с списком покупок. Отправка файла со списком покупок."""
+        ingredients = Amount.objects.filter(
+            recipe__shopping_list__user=request.user
+        ).values(
+            'ingredient__name', 'ingredient__measurement_unit'
+        ).annotate(
+            amount=Sum('amount')
+        )
 
         shopping_res_list = ['Список покупок:\n']
-        for ingridient, amount in result.items():
+        for ingridient in ingredients:
             shopping_res_list.append(
-                f'\n{ingridient} - {amount[0]} {amount[1]}'
+                '\n{} - {} {}'.format(
+                    ingridient['ingredient__name'],
+                    ingridient['amount'],
+                    ingridient['ingredient__measurement_unit']
+                )
             )
 
         response = HttpResponse(shopping_res_list, content_type='text/plain')
