@@ -102,8 +102,7 @@ def add_ingredients(ingredients_data, recipe):
         ingredients.append(
             Amount(
                 recipe=recipe,
-                ingredient=get_object_or_404(Ingredient,
-                                             id=ingredient_data['id']),
+                ingredient_id=ingredient_data['id'],
                 amount=ingredient_data['amount']
             )
         )

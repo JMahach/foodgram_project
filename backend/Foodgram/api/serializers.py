@@ -225,7 +225,6 @@ class RecipeSerializerWrite(serializers.ModelSerializer):
         instance.tags.set(tags_data)
         instance.amounts.all().delete()
         add_ingredients(ingredients_data, instance)
-        instance.save()
 
         return instance
 

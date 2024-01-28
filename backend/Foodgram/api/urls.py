@@ -18,12 +18,12 @@ urlpatterns = [
     path(
         'users/subscriptions/',
         UserSubscribtionsListView.as_view(),
-        name='subscriptions-list'
+        name='user_subscriptions'
     ),
     path(
         'users/<int:user_id>/subscribe/',
         UserSubscribeView.as_view(),
-        name='subscription-akt'
+        name='user_subscribe_toggle'
     ),
     path('', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
